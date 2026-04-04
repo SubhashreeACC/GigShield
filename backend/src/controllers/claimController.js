@@ -1,4 +1,5 @@
 import prisma from "../prismaClient.js"
+import { getDatabaseErrorResponse } from "../utils/databaseErrors.js"
 
 export const createClaim = async (req, res) => {
   const { policyId, eventType, description, amount } = req.body
@@ -37,6 +38,13 @@ export const createClaim = async (req, res) => {
 
     res.status(201).json(claim)
   } catch (error) {
+    const databaseError = getDatabaseErrorResponse(error)
+
+    if (databaseError) {
+      return res.status(databaseError.status).json({ error: databaseError.error })
+    }
+
+    console.error("createClaim failed", error)
     res.status(500).json({ error: "Failed to create claim" })
   }
 }
@@ -50,6 +58,13 @@ export const getClaims = async (req, res) => {
 
     res.json(claims)
   } catch (error) {
+    const databaseError = getDatabaseErrorResponse(error)
+
+    if (databaseError) {
+      return res.status(databaseError.status).json({ error: databaseError.error })
+    }
+
+    console.error("getClaims failed", error)
     res.status(500).json({ error: "Failed to fetch claims" })
   }
 }

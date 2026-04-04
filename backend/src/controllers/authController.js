@@ -1,6 +1,7 @@
 import prisma from "../prismaClient.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
+import { getDatabaseErrorResponse } from "../utils/databaseErrors.js"
 
 const sanitizeUser = ({ password, ...user }) => user
 
@@ -25,10 +26,17 @@ export const registerUser = async (req, res) => {
 
     res.status(201).json(sanitizeUser(user))
   } catch (error) {
+    const databaseError = getDatabaseErrorResponse(error)
+
+    if (databaseError) {
+      return res.status(databaseError.status).json({ error: databaseError.error })
+    }
+
     if (error.code === "P2002") {
       return res.status(409).json({ error: "Email already registered" })
     }
 
+    console.error("registerUser failed", error)
     res.status(500).json({ error: "Registration failed" })
   }
 }
@@ -60,6 +68,13 @@ export const loginUser = async (req, res) => {
 
     res.json({ token, user: sanitizeUser(user) })
   } catch (error) {
+    const databaseError = getDatabaseErrorResponse(error)
+
+    if (databaseError) {
+      return res.status(databaseError.status).json({ error: databaseError.error })
+    }
+
+    console.error("loginUser failed", error)
     res.status(500).json({ error: "Login failed" })
   }
 }

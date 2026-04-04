@@ -5,7 +5,11 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
+    "db:migrate:deploy": "powershell -ExecutionPolicy Bypass -File ./scripts/apply-migrations.ps1",
+    "db:prepare": "npm run db:start",
+    "prestart": "npm run db:prepare",
     "start": "node server.js",
+    "predev": "npm run db:prepare",
     "dev": "node --watch server.js",
     "db:start": "powershell -ExecutionPolicy Bypass -File ./scripts/start-local-postgres.ps1",
     "db:stop": "powershell -ExecutionPolicy Bypass -File ./scripts/stop-local-postgres.ps1",
