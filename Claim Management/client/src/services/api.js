@@ -2,7 +2,22 @@ import axios from 'axios';
 
 const TOKEN_KEY = 'gigshield.token';
 const USER_KEY = 'gigshield.user';
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+
+const getApiBaseUrl = () => {
+  const configuredUrl = process.env.REACT_APP_API_URL?.trim();
+
+  if (configuredUrl) {
+    return configuredUrl;
+  }
+
+  if (process.env.NODE_ENV === 'production') {
+    return '/api';
+  }
+
+  return 'http://localhost:5000/api';
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 const getStoredToken = () => window.localStorage.getItem(TOKEN_KEY);
 
