@@ -1,0 +1,12 @@
+{
+  "extends": "../../packages/jsconfig/base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "plugins": [{ "name": "next" }]
+  },
+  "include": ["src/**/*", "next.config.*"],
+  "exclude": ["node_modules", ".next"]
+}

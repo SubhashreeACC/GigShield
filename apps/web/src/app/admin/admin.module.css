@@ -1,0 +1,58 @@
+/* Shared Admin Page Styles */
+.title { font-size: var(--text-h1); margin-bottom: var(--space-2); }
+.subtitle { font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-5); }
+
+.toolbar {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+  margin-bottom: var(--space-5); flex-wrap: wrap;
+}
+
+.count { font-size: var(--text-sm); color: var(--color-text-muted); }
+
+.filters { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+.filterBtn {
+  padding: var(--space-2) var(--space-3); font-size: var(--text-caption); font-weight: var(--weight-medium);
+  background: var(--color-card-bg); border: 1px solid var(--color-border); border-radius: var(--radius-full);
+  cursor: pointer; transition: all var(--transition-fast); color: var(--color-text-secondary);
+}
+.filterBtn:hover { border-color: var(--color-secondary); }
+.filterActive { background: var(--color-accent); color: #fff; border-color: var(--color-accent); }
+
+/* Table */
+.table { width: 100%; overflow-x: auto; }
+.tableHeader {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--space-2);
+  padding: var(--space-3) var(--space-4); font-size: var(--text-caption); font-weight: var(--weight-semibold);
+  color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--color-border); background: var(--color-bg);
+}
+.tableRow {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--space-2);
+  padding: var(--space-3) var(--space-4); font-size: var(--text-sm); border-bottom: 1px solid var(--color-border);
+  align-items: center; transition: background var(--transition-fast);
+}
+.tableRow:hover { background: var(--color-bg); }
+.cellName { font-weight: var(--weight-medium); }
+.muted { color: var(--color-text-muted); font-size: var(--text-caption); }
+
+.actions { display: flex; gap: var(--space-2); }
+.actionBtn {
+  background: none; border: none; font-size: 1rem; cursor: pointer;
+  padding: var(--space-1); border-radius: var(--radius-sm); transition: all var(--transition-fast);
+}
+.actionBtn:hover { background: var(--color-bg); transform: scale(1.1); }
+
+/* Pagination */
+.pagination {
+  display: flex; align-items: center; justify-content: center;
+  gap: var(--space-4); margin-top: var(--space-6);
+}
+.pageInfo { font-size: var(--text-sm); color: var(--color-text-muted); }
+
+/* Fraud Alerts */
+.alertList { display: grid; gap: var(--space-3); }
+.alertCard { padding: var(--space-4); }
+.alertHeader { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2); }
+.alertBody { font-size: var(--text-sm); color: var(--color-text-secondary); margin-bottom: var(--space-3); }
+.checks { display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-3); }
+.alertActions { display: flex; gap: var(--space-2); }

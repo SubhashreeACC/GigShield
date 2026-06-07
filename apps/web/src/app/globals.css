@@ -1,0 +1,422 @@
+/* ============================================
+   GigShield Design System
+   Based on Design.md specifications
+   ============================================ */
+
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+/* --- CSS Custom Properties (Design Tokens) --- */
+:root {
+  /* Colors — from Design.md palette */
+  --color-primary: #0B1F3A;        /* Deep Blue — trust, finance */
+  --color-accent: #00D084;          /* Electric Green — AI + payouts */
+  --color-accent-hover: #00b872;
+  --color-secondary: #4DA6FF;       /* Sky Blue — weather/events */
+  --color-warning: #FF8A00;         /* Orange — disruptions */
+  --color-warning-hover: #e67b00;
+  --color-bg: #F7F9FC;              /* Off-white — clean UI */
+  --color-text: #1A1A1A;            /* Dark Gray — readability */
+  --color-text-secondary: #5A6474;
+  --color-text-muted: #8B95A5;
+  --color-border: #E2E8F0;
+  --color-card-bg: #FFFFFF;
+  --color-danger: #EF4444;
+  --color-success: #00D084;
+
+  /* Typography — Inter (primary) + Poppins (headings) */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Poppins', 'Inter', sans-serif;
+
+  /* Font Sizes — from Design.md scale */
+  --text-hero: 2.25rem;         /* 36px — Hero title */
+  --text-h1: 2rem;              /* 32px */
+  --text-h2: 1.5rem;            /* 24px — Section header */
+  --text-h3: 1.25rem;           /* 20px */
+  --text-body: 1rem;            /* 16px — Body text */
+  --text-sm: 0.875rem;          /* 14px — Small body */
+  --text-caption: 0.75rem;      /* 12px — Caption */
+
+  /* Font Weights */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Spacing — 8pt grid system from Design.md */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.5rem;    /* 24px */
+  --space-6: 2rem;      /* 32px */
+  --space-7: 2.5rem;    /* 40px */
+  --space-8: 3rem;      /* 48px */
+  --space-10: 4rem;     /* 64px */
+  --space-12: 6rem;     /* 96px */
+
+  /* Border Radius — rounded corners 8-12px per Design.md */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(11, 31, 58, 0.05);
+  --shadow-md: 0 4px 12px rgba(11, 31, 58, 0.08);
+  --shadow-lg: 0 8px 24px rgba(11, 31, 58, 0.12);
+  --shadow-card: 0 2px 8px rgba(11, 31, 58, 0.06);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 350ms ease;
+
+  /* Layout */
+  --max-width: 1200px;
+  --nav-height: 64px;
+  --bottom-nav-height: 72px;
+}
+
+/* --- CSS Reset & Base --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-weight: var(--weight-regular);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: 1.3;
+  color: var(--color-primary);
+}
+
+h1 {
+  font-size: var(--text-h1);
+  font-weight: var(--weight-bold);
+}
+
+h2 {
+  font-size: var(--text-h2);
+  font-weight: var(--weight-semibold);
+}
+
+h3 {
+  font-size: var(--text-h3);
+  font-weight: var(--weight-semibold);
+}
+
+p {
+  margin-bottom: var(--space-4);
+  color: var(--color-text-secondary);
+}
+
+a {
+  color: var(--color-secondary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary);
+}
+
+/* --- Buttons — from Design.md component system --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  font-family: var(--font-primary);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  border-radius: var(--radius-md);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  min-height: 48px;            /* Large tap area — mobile-first */
+  min-width: 48px;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* Primary — Green filled */
+.btn-primary {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+}
+
+.btn-primary:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  box-shadow: var(--shadow-md);
+}
+
+/* Secondary — Outline blue */
+.btn-secondary {
+  background: transparent;
+  color: var(--color-secondary);
+  border-color: var(--color-secondary);
+}
+
+.btn-secondary:hover {
+  background: var(--color-secondary);
+  color: #fff;
+}
+
+/* Danger — Orange */
+.btn-danger {
+  background: var(--color-warning);
+  color: #fff;
+  border-color: var(--color-warning);
+}
+
+.btn-danger:hover {
+  background: var(--color-warning-hover);
+  border-color: var(--color-warning-hover);
+}
+
+/* --- Cards — core UI pattern from Design.md --- */
+.card {
+  background: var(--color-card-bg);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border);
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.card-interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Card variants */
+.card-plan {
+  text-align: center;
+  padding: var(--space-6);
+}
+
+.card-alert {
+  border-left: 4px solid var(--color-warning);
+}
+
+.card-payout {
+  border-left: 4px solid var(--color-accent);
+}
+
+.card-risk {
+  border-left: 4px solid var(--color-secondary);
+}
+
+/* --- Status Badges --- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-caption);
+  font-weight: var(--weight-medium);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.badge-success {
+  background: rgba(0, 208, 132, 0.12);
+  color: #059669;
+}
+
+.badge-warning {
+  background: rgba(255, 138, 0, 0.12);
+  color: #d97706;
+}
+
+.badge-danger {
+  background: rgba(239, 68, 68, 0.12);
+  color: #dc2626;
+}
+
+.badge-info {
+  background: rgba(77, 166, 255, 0.12);
+  color: #2563eb;
+}
+
+/* --- Form Elements --- */
+.input {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-primary);
+  font-size: var(--text-body);
+  color: var(--color-text);
+  background: var(--color-card-bg);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  min-height: 48px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 3px rgba(77, 166, 255, 0.15);
+}
+
+.input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* --- Layout Utilities --- */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+/* .page class for authenticated routes that show TopNav */
+.page {
+  min-height: calc(100vh - var(--nav-height));
+  padding-top: var(--space-6);
+  padding-bottom: calc(var(--space-8) + var(--bottom-nav-height));
+}
+
+@media (min-width: 768px) {
+  .page {
+    padding-bottom: var(--space-8);
+  }
+}
+
+/* --- Animations — from Design.md motion spec --- */
+
+/* Shimmer loading */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--color-border) 25%, #f0f4f8 50%, var(--color-border) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+/* Soft bounce — for alerts */
+@keyframes softBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.animate-bounce {
+  animation: softBounce 0.6s ease;
+}
+
+/* Fade in */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* Pulse — for live indicators */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Confetti burst placeholder class */
+.animate-confetti {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* --- Responsive Breakpoints --- */
+/* Mobile-first: base styles are mobile (1-column)
+   Tablet: 768px+
+   Desktop: 1024px+
+*/
+
+@media (min-width: 768px) {
+  :root {
+    --text-hero: 2.5rem;    /* 40px */
+    --text-h1: 2.25rem;
+    --text-h2: 1.75rem;
+  }
+
+  .container {
+    padding: 0 var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 var(--space-8);
+  }
+}
+
+/* --- Accessibility — from Design.md a11y section --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus visible for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+/* Screen-reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

@@ -1,0 +1,153 @@
+// GigShield Prisma Schema
+// Phase 2: Database & ORM Setup
+// All models per gigshield_todo.md Tasks 8–16
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// --- Task 9: User model ---
+model User {
+  id        String   @id @default(cuid())
+  phone     String   @unique
+  name      String?
+  platform  String?  // Swiggy | Zomato | Amazon
+  city      String?
+  zone      String?
+  lat       Float?
+  lng       Float?
+  role      String   @default("user") // user | admin
+  riskScore Float?
+  riskLevel String?  // low | medium | high
+  onboarded Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  subscriptions Subscription[]
+  claims        Claim[]
+  payouts       Payout[]
+  fraudChecks   FraudCheck[]
+
+  @@index([city, zone])
+  @@index([phone])
+}
+
+// --- Task 10: Plan model ---
+model Plan {
+  id             String   @id @default(cuid())
+  name           String   @unique // Basic | Standard | Pro
+  weeklyPremium  Int      // 29 | 59 | 99
+  coverageAmount Int      // 500 | 1000 | 2000
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  subscriptions Subscription[]
+}
+
+// --- Task 11: Subscription model ---
+model Subscription {
+  id                     String   @id @default(cuid())
+  userId                 String
+  planId                 String
+  status                 String   @default("active") // active | expired | cancelled
+  startDate              DateTime
+  endDate                DateTime
+  autoRenew              Boolean  @default(true)
+  razorpaySubscriptionId String?
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id])
+  plan   Plan   @relation(fields: [planId], references: [id])
+  claims Claim[]
+
+  @@index([userId])
+  @@index([userId, status])
+}
+
+// --- Task 12: TriggerEvent model ---
+model TriggerEvent {
+  id               String   @id @default(cuid())
+  type             String   // rain | heat | aqi | curfew | traffic
+  city             String
+  zone             String
+  severity         String   // low | medium | high | critical
+  rawData          Json     // Raw API response data
+  source           String   // openweather | aqicn | manual
+  detectedAt       DateTime @default(now())
+  thresholdBreached String  // Description of which threshold was breached
+  createdAt        DateTime @default(now())
+
+  claims Claim[]
+
+  @@index([city, zone])
+  @@index([type, city, detectedAt])
+  @@index([detectedAt])
+}
+
+// --- Task 13: Claim model (append-only ledger) ---
+// No UPDATE — insert only for audit trail
+model Claim {
+  id              String   @id @default(cuid())
+  userId          String
+  subscriptionId  String
+  triggerEventId  String
+  status          String   @default("pending") // pending | approved | rejected | paid
+  amount          Int
+  fraudScore      Float?
+  createdAt       DateTime @default(now())
+
+  user         User         @relation(fields: [userId], references: [id])
+  subscription Subscription @relation(fields: [subscriptionId], references: [id])
+  triggerEvent TriggerEvent @relation(fields: [triggerEventId], references: [id])
+  payouts      Payout[]
+  fraudChecks  FraudCheck[]
+
+  @@index([userId])
+  @@index([userId, status])
+  @@index([triggerEventId])
+  @@index([status])
+}
+
+// --- Task 14: Payout model (append-only ledger) ---
+// No UPDATE — insert only for audit trail
+model Payout {
+  id               String   @id @default(cuid())
+  claimId          String
+  userId           String
+  amount           Int
+  method           String   // upi | wallet
+  razorpayPayoutId String?
+  status           String   @default("initiated") // initiated | success | failed
+  createdAt        DateTime @default(now())
+
+  claim Claim @relation(fields: [claimId], references: [id])
+  user  User  @relation(fields: [userId], references: [id])
+
+  @@index([claimId])
+  @@index([userId])
+  @@index([status])
+}
+
+// --- Task 15: FraudCheck model ---
+model FraudCheck {
+  id        String   @id @default(cuid())
+  claimId   String
+  userId    String
+  checkType String   // location | activity | duplicate | anomaly
+  passed    Boolean
+  details   Json     // Detailed check results
+  checkedAt DateTime @default(now())
+
+  claim Claim @relation(fields: [claimId], references: [id])
+  user  User  @relation(fields: [userId], references: [id])
+
+  @@index([claimId])
+  @@index([userId])
+}

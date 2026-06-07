@@ -1,0 +1,27 @@
+.title { font-size: var(--text-h1); margin-bottom: var(--space-5); }
+
+.profileCard { text-align: center; padding: var(--space-6); margin-bottom: var(--space-4); }
+
+.avatar {
+  width: 80px; height: 80px; margin: 0 auto var(--space-3);
+  background: linear-gradient(135deg, var(--color-primary), #1a3a5c);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+}
+.avatarEmoji { font-size: 2rem; }
+
+.userName { font-size: var(--text-h2); margin-bottom: var(--space-1); }
+.userPhone { font-size: var(--text-sm); color: var(--color-text-muted); display: block; margin-bottom: var(--space-5); }
+
+.infoGrid { display: grid; gap: var(--space-1); text-align: left; }
+.infoItem { display: flex; justify-content: space-between; align-items: center; padding: var(--space-3) 0; border-bottom: 1px solid var(--color-border); }
+.infoItem:last-child { border-bottom: none; }
+.infoLabel { font-size: var(--text-sm); color: var(--color-text-muted); }
+.infoValue { font-weight: var(--weight-medium); font-size: var(--text-sm); }
+
+.section { margin-bottom: var(--space-4); }
+.sectionTitle { font-size: var(--text-h3); margin-bottom: var(--space-4); }
+
+.subInfo { display: grid; gap: 0; }
+.noSub { color: var(--color-text-muted); text-align: center; }
+
+.actions { margin-top: var(--space-6); padding-bottom: var(--space-12); }

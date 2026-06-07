@@ -1,0 +1,51 @@
+.title { font-size: var(--text-h1); margin-bottom: var(--space-5); }
+.sectionTitle { font-size: var(--text-h3); margin-bottom: var(--space-4); }
+
+.riskCard, .weatherCard, .trendCard, .coverageCard { margin-bottom: var(--space-4); }
+
+/* Risk */
+.riskDisplay { display: flex; align-items: center; gap: var(--space-6); flex-wrap: wrap; }
+
+.riskCircle {
+  width: 120px; height: 120px;
+  border-radius: 50%; border: 6px solid var(--color-accent);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.riskValue { font-family: var(--font-heading); font-size: var(--text-hero); font-weight: var(--weight-bold); color: var(--color-primary); line-height: 1; }
+.riskLabel { font-size: var(--text-caption); color: var(--color-text-muted); }
+.riskInfo { flex: 1; min-width: 200px; }
+.riskDesc { font-size: var(--text-sm); color: var(--color-text-secondary); margin-top: var(--space-2); }
+
+/* Conditions */
+.conditionsGrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
+@media (min-width: 768px) { .conditionsGrid { grid-template-columns: repeat(4, 1fr); } }
+
+.conditionItem {
+  display: flex; flex-direction: column; align-items: center; gap: var(--space-1);
+  padding: var(--space-4); background: var(--color-bg); border-radius: var(--radius-md);
+}
+.conditionIcon { font-size: 1.5rem; }
+.conditionValue { font-family: var(--font-heading); font-size: var(--text-h3); font-weight: var(--weight-bold); color: var(--color-primary); }
+.conditionLabel { font-size: var(--text-caption); color: var(--color-text-muted); }
+.noData { color: var(--color-text-muted); text-align: center; }
+
+/* Chart */
+.chart { display: flex; align-items: flex-end; justify-content: center; gap: var(--space-4); height: 200px; padding-top: var(--space-4); }
+.chartBar { display: flex; flex-direction: column; align-items: center; gap: var(--space-1); flex: 1; max-width: 60px; }
+.barWrapper { width: 100%; height: 140px; background: var(--color-bg); border-radius: var(--radius-sm); display: flex; align-items: flex-end; overflow: hidden; }
+.barFill { width: 100%; background: linear-gradient(to top, var(--color-accent), #00e896); border-radius: var(--radius-sm); transition: height 0.8s ease; }
+.barAmount { font-size: var(--text-caption); font-weight: var(--weight-medium); color: var(--color-text); }
+.barWeek { font-size: var(--text-caption); color: var(--color-text-muted); }
+
+/* Coverage */
+.coverageGrid { display: grid; gap: var(--space-2); }
+.coverageItem {
+  display: flex; align-items: center; gap: var(--space-3);
+  padding: var(--space-3); background: var(--color-bg); border-radius: var(--radius-md);
+}
+.coverageIcon { font-size: 1.25rem; }
+.coverageInfo { flex: 1; }
+.coverageType { display: block; font-weight: var(--weight-medium); font-size: var(--text-sm); }
+.coverageThreshold { font-size: var(--text-caption); color: var(--color-text-muted); }

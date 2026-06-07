@@ -1,0 +1,282 @@
+/* ========================================
+   Dashboard Page Styles
+   (Moved from home page for logged-in users)
+   ======================================== */
+
+/* --- Coverage Card (logged-in) --- */
+.coverageCard {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #1a3a5c 100%);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  color: #fff;
+  margin-bottom: var(--space-6);
+  animation: fadeIn 0.5s ease;
+}
+
+.coverageStatus {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.coverageIcon {
+  font-size: 2.5rem;
+}
+
+.coverageTitle {
+  font-size: var(--text-h2);
+  color: #fff;
+  margin-bottom: var(--space-1);
+}
+
+.coveragePlan {
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+.coverageMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.coverageDays {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* --- Page Header --- */
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+}
+
+.greeting {
+  font-size: var(--text-h2);
+  margin-bottom: var(--space-1);
+}
+
+.greetingSub {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* --- Sections --- */
+.section {
+  margin-bottom: var(--space-6);
+}
+
+.sectionTitle {
+  font-size: var(--text-h3);
+  margin-bottom: var(--space-4);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.sectionHeader .sectionTitle {
+  margin-bottom: 0;
+}
+
+.viewAll {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-secondary);
+}
+
+/* --- Alerts --- */
+.alertGrid {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.alertCard {
+  padding: var(--space-4);
+}
+
+.alertHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+}
+
+.alertEmoji {
+  font-size: 1.5rem;
+}
+
+.alertMessage {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-2);
+}
+
+.alertCovered {
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+  font-weight: var(--weight-medium);
+  margin: 0;
+}
+
+.noAlerts {
+  text-align: center;
+  padding: var(--space-6);
+  color: var(--color-text-muted);
+}
+
+.noAlertsIcon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+/* --- Earnings Card --- */
+.earningsCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+}
+
+.earningsAmount {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.earningsValue {
+  font-family: var(--font-heading);
+  font-size: var(--text-hero);
+  font-weight: var(--weight-bold);
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+.earningsLabel {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.earningsBars {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-2);
+  height: 80px;
+}
+
+.barGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.bar {
+  width: 20px;
+  height: 60px;
+  background: var(--color-border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.barFill {
+  width: 100%;
+  background: linear-gradient(to top, var(--color-accent), #00e896);
+  border-radius: var(--radius-sm);
+  transition: height 0.6s ease;
+}
+
+.barLabel {
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
+}
+
+/* --- Claims List --- */
+.claimsList {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.claimItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4);
+  text-decoration: none;
+}
+
+.claimInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.claimType {
+  font-weight: var(--weight-medium);
+  color: var(--color-text);
+  text-transform: capitalize;
+}
+
+.claimDate {
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
+}
+
+.claimRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-1);
+}
+
+.claimAmount {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-semibold);
+  color: var(--color-primary);
+}
+
+/* Loading */
+.heroCard {
+  padding: var(--space-4);
+}
+
+/* Not logged in prompt */
+.loginPrompt {
+  text-align: center;
+  padding: var(--space-12) var(--space-4);
+}
+
+.loginPromptIcon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: var(--space-4);
+}
+
+.loginPromptTitle {
+  font-size: var(--text-h2);
+  margin-bottom: var(--space-3);
+}
+
+.loginPromptText {
+  color: var(--color-text-muted);
+  max-width: 400px;
+  margin: 0 auto var(--space-6);
+}
+
+.loginPromptActions {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: center;
+  flex-wrap: wrap;
+}

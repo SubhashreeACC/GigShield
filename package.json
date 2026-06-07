@@ -1,0 +1,34 @@
+{
+  "name": "gigshield",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI-powered parametric income protection for gig workers",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "services/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace=apps/web",
+    "dev:api": "npm run dev --workspace=apps/api",
+    "dev:ml": "cd services/ml && uvicorn main:app --reload --port 8000",
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\"",
+    "build:web": "npm run build --workspace=apps/web",
+    "lint": "npm run lint --workspaces --if-present",
+    "db:generate": "npm run db:generate --workspace=apps/api",
+    "db:migrate": "npm run db:migrate --workspace=apps/api",
+    "db:seed": "npm run db:seed --workspace=apps/api",
+    "db:studio": "npm run db:studio --workspace=apps/api"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.20.0",
+    "concurrently": "^9.1.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "dependencies": {
+    "better-auth": "^1.6.9",
+    "pg": "^8.20.0"
+  }
+}
